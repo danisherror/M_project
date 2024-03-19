@@ -13,12 +13,14 @@ const user=require('./Routes/user')
 const feedback=require('./Routes/feedback')
 const complaint=require('./Routes/complaint')
 const admin=require('./Routes/admin')
+const hostel=require('./Routes/hostel')
+
 //test route
 app.use("/api/v1",user)
 app.use("/api/v1",feedback)
 app.use("/api/v1",complaint)
 app.use("/api/v1",admin)
-
+app.use("/api/v2",hostel)
 app.get('/test',(req,res)=>{
     res.send("SUCCESS")
 })

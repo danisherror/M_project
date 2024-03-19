@@ -29,9 +29,9 @@ const ApplyHostel = () => {
         event.preventDefault();
 
         try {
-            console.log(formData)
-            const status = "Pending"
+            // console.log(formData)
             const { hostelName, block, roomNo } = formData;
+            console.log(hostelName, block, roomNo);
             const response = await fetch(`/api/v1/applyHostel`, {
                 method: "PATCH",
                 headers: {
@@ -39,18 +39,30 @@ const ApplyHostel = () => {
                     "Authorization": `Bearer ${token}`
                 },
                 body: JSON.stringify({
-                    hostelName, block, status, roomNo
+                    hostelName, block, 
+                    roomNumber:roomNo
                 })
             });
             console.log(response);
             if (response.status === 200) { // Assuming 201 (Created) for successful signup
                 alert(`Registered successfully!`);
                 navigate('/uhomepage'); // Use appropriate redirect logic
-            } else {
+            }
+            else if(response.status === 400) {
+                alert("student is already assigned to a room")
+             } 
+            else if(response.status === 401) {
+                alert("Room is already full. Please choose another room.")
+             } 
+             else if(response.status===402)
+             {
+                alert("Student is already assigned to this room")
+             }
+            else {
                 // Handle other status codes appropriately
                 // Consider using more granular error handling
-                console.error('Error:', response.status, response.data);
-                alert('Error registering. Please try again.');
+                console.error('Error:', response.status, response.error);
+                alert(`Error registering.${response.error}`);
             }
         } catch (error) {
             console.error('Error:', error);
@@ -73,7 +85,7 @@ const ApplyHostel = () => {
                         onChange={handlehostelNameChange}
                     >
                         <option>select the option below</option>
-                        <option value="fresher">Fresher Block</option>
+                        <option value="Fresher">Fresher Block</option>
                         <option value="aryabhata">Aryabhata Hostel</option>
                     </select>
                 </div>
@@ -88,16 +100,16 @@ const ApplyHostel = () => {
                             onChange={(event) => setFormData((prevData) => ({ ...prevData, block: event.target.value }))}
                         >
                             <option >select the Block</option>
-                            {formData.hostelName === 'fresher' &&
-                                ['A', 'B', 'C'].map((block) => (
+                            {formData.hostelName === 'Fresher' &&
+                                ['Block A', 'Block B', 'Block C'].map((block) => (
                                     <option key={block} value={block}>
-                                        Block {block}
+                                         {block}
                                     </option>
                                 ))}
                             {formData.hostelName === 'aryabhata' &&
-                                ['X', 'Y', 'Z'].map((block) => (
+                                ['Block X', 'Block Y', 'Block Z'].map((block) => (
                                     <option key={block} value={block}>
-                                        Block {block}
+                                         {block}
                                     </option>
                                 ))}
                         </select>

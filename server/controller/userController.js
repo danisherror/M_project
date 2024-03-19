@@ -2,6 +2,7 @@ const User=require('../models/user')
 const BigPromise=require('../middlewares/bigPromise')
 const bcrypt=require('bcryptjs')
 const jwt=require('jsonwebtoken')
+const Hostel=require('../models/hostel')
 
 
 exports.signup=BigPromise(async(req,res,next)=>{
@@ -102,19 +103,47 @@ exports.editStudentProfile=BigPromise(async(req,res)=>{
     }
 })
 exports.applyHostel=BigPromise(async(req,res)=>{
-    try{
-    const id=req.user._id
-    const user=await User.findByIdAndUpdate(id,req.body,{
-        new:true
-    });
-    console.log(user);
-    res.status(200).json({
-        
-    })
-    }
-    catch(error)
-    {
-        console.log(error);
+    const {  hostelName, block, roomNumber } = req.body;
+    const studentId=req.user._id
+    console.log(hostelName, block, roomNumber)
+    try {
+        // Check if the specified room exists in the database
+        if (!hostelName || !block || !roomNumber) {
+            return res.status(400).json({ error: 'Missing required fields' });
+        }
+
+        const existingRoom = await Hostel.findOne({
+            hostelName: hostelName,
+            block: block,
+            roomNumber: roomNumber
+        });
+
+        if (!existingRoom) {
+            return res.status(404).json({ error: 'Room not found' });
+        }
+        // Check if the room is already full
+        if (existingRoom.studentIds.length >= existingRoom.capacity) {
+            return res.status(401).json({ error: 'Room is already full. Please choose another room.' });
+        }
+        const occupiedRoom = await Hostel.find({studentIds: studentId});
+        if (occupiedRoom.length>0) {
+            return res.status(400).json({ error: 'student is already assigned to a room' });
+        }
+        if (existingRoom.studentIds.includes(studentId)) {
+            return res.status(402).json({ error: 'Student is already assigned to this room' });
+        }
+
+        // Update the student's hostel information in the database
+        existingRoom.studentIds.push(studentId);
+        await existingRoom.save();
+        console.log(existingRoom);
+
+        // Return success response
+        res.status(200).json({ message: 'Hostel application successful', room: existingRoom });
+    } catch (error) {
+        console.error('Error applying hostel:', error);
+        // Return error response
+        res.status(500).json({ error: 'Internal server error' });
     }
 })
 
