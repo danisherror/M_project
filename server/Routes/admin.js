@@ -1,6 +1,6 @@
 const express=require('express')
 const router=express.Router()
-const {signup,signin,adminprofile,editImage,editAdminProfile,getStudentprofiles,editStudentProfile,studentProfile,getStudentfeedback,getStudentcomplaints}=require('../controller/adminController')
+const {signup,signin,adminprofile,editImage,editAdminProfile,getStudentprofiles,editStudentProfile,studentProfile,getStudentfeedback,getStudentcomplaints,createHostel,deleteHostel,getHostelDetails}=require('../controller/adminController')
 const {aisLoggedIn}=require('../middlewares/admin')
 
 router.route('/asignup').post(signup)
@@ -15,5 +15,7 @@ router.route('/astudentProfile/:id').get(studentProfile)
 
 router.route('/getstudentfeedback').get(aisLoggedIn,getStudentfeedback)
 router.route('/getstudentroomissues').get(aisLoggedIn,getStudentcomplaints)
-
+router.route('/createHostel').post(aisLoggedIn,createHostel)
+router.route('/deleteHostel').delete(aisLoggedIn,deleteHostel)
+router.route('/getHostelDetails').get(aisLoggedIn,getHostelDetails)
 module.exports=router;

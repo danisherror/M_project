@@ -63,6 +63,8 @@ const PrintRoomComplaints = () => {
                             <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Student Feedbacks</h3>
                         </div>
                         <div class="card-body pt-0">
+                        <div className="scroll-container" style={{ maxHeight: '500px', overflowY: 'scroll' }}>
+
                             <table class="table table-bordered">
 
                                 <thead>
@@ -86,6 +88,7 @@ const PrintRoomComplaints = () => {
                                     ))}
                                 </tbody>
                             </table>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -20,7 +20,10 @@ export default function Landing() {
 
                 <div class="nav-links">
                     <a href="http://localhost:3000/ahomepage">HomePage</a>
-                    <a href="http://localhost:3000/getallStudents">Hostel Status</a>
+                    <a href="http://localhost:3000/createHostel">Create Hostel</a>
+                    <a href="http://localhost:3000/DeleteHostel">Delete Hostel</a>
+                    <a href="http://localhost:3000/getHostelDetails">Hostel details</a>
+                    <a href="http://localhost:3000/getallStudents">Student Details</a>
                     <a href="http://localhost:3000/getStudentFeedback">FeedBacks</a>
                     <a href="http://localhost:3000/getstudentroomissues">Room Issues</a>
                     <a href="http://localhost:3000/">Logout</a>

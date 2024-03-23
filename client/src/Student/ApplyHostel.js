@@ -101,7 +101,7 @@ const ApplyHostel = () => {
                         >
                             <option >select the Block</option>
                             {formData.hostelName === 'Fresher' &&
-                                ['Block A', 'Block B', 'Block C'].map((block) => (
+                                ['A', 'B', 'C'].map((block) => (
                                     <option key={block} value={block}>
                                          {block}
                                     </option>
