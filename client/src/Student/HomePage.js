@@ -74,8 +74,6 @@ const HomePage = () => {
                             </div>
                         </div>
 
-
-
                         <div class="col-lg-8">
 
                             <div class="card shadow-sm">
@@ -103,15 +101,15 @@ const HomePage = () => {
                                             </td>
                                         </tr>
                                         <tr>
-                                           
-                                                    <th width="30%">Apply for hostel</th>
-                                                    <td width="2%">:</td>
-                                                    <td>
-                                                        <div className="add_btn" align="center">
-                                                            <NavLink to={`/applyHostel`}> <button className="btn btn-primary" >Apply for hostel</button></NavLink>
-                                                        </div>
-                                                    </td>
-                                               
+
+                                            <th width="30%">Apply for hostel</th>
+                                            <td width="2%">:</td>
+                                            <td>
+                                                <div className="add_btn" align="center">
+                                                    <NavLink to={`/applyHostel`}> <button className="btn btn-primary" >Apply for hostel</button></NavLink>
+                                                </div>
+                                            </td>
+
                                         </tr>
                                     </table>
                                 </div>
@@ -146,7 +144,6 @@ const HomePage = () => {
                                     </table>
                                 </div>
                             </div>
-
 
 
                         </div>

@@ -152,6 +152,18 @@ exports.getStudentcomplaints=BigPromise(async(req,res,next)=>{
         result
     })
 })
+exports.editstudentcomplaintstatus=BigPromise(async(req,res,next)=>{
+    const id=req.params.id;
+    const {title,description,status}=req.body;
+    console.log(title,description,status)
+    await Complaint.findByIdAndUpdate(id,req.body,{
+        new:true
+    });
+
+    res.status(200).json({
+        message:"SUCCESSFULLY UPDATED"
+    })
+})
 exports.getHostelDetails=BigPromise(async(req,res,next)=>{
 
     const hostel_names = await CollegeHostelRoom.find().distinct('hostelName');

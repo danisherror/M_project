@@ -12,6 +12,7 @@ import {  useNavigate } from 'react-router-dom'
 
 const EditStudentComplaint = () => {
     const navigate = useNavigate();
+    const [title, setTitle] = useState("");
     const [review, setReview] = useState("");
     const images = [Room1, Room2, Room3, Room4];
 
@@ -54,6 +55,7 @@ const EditStudentComplaint = () => {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
+                title:title,
                 description: review,
             }),
         });
@@ -85,6 +87,7 @@ const EditStudentComplaint = () => {
     
         } else {
             // setINP(data.user)
+            setTitle(data.result.title)
             setReview(data.result.description)
             console.log(review);
             console.log("get data");
@@ -112,6 +115,20 @@ const EditStudentComplaint = () => {
                             }}
                         >
                         </Box>
+                    </div>
+                    <div style={{ marginBottom: "20px", width: "300px" }}>
+                        <select
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                            style={{ width: "100%", padding: "10px" }}
+                        >
+                            <option value="">Select Title</option>
+                            <option value="Room Cleaning">Room Cleaning</option>
+                            <option value="Electronics Not Working">Electronics Not Working</option>
+                            <option value="Animals Problem">Animals Problem</option>
+                            <option value="Others">Others</option>
+                            {/* Add more options as needed */}
+                        </select>
                     </div>
                     <div style={{ marginBottom: "20px", width: "300px" }}>
                         <textarea

@@ -5,10 +5,11 @@ const BigPromise=require('../middlewares/bigPromise')
 exports.addcomplaint=BigPromise(async(req,res,next)=>{
 
     console.log("Enter the route")
-    const {description}=req.body
+    const {title,description}=req.body
     
     const result=await complaint.create({
         user:req.user._id,
+        title:title,
         description:description
     })
     console.log(result)
@@ -31,9 +32,10 @@ exports.editcomplaint=BigPromise(async(req,res,next)=>{
 
     const id=req.params.id;
     console.log(id)
-    const {description}=req.body;
+    const {title,description}=req.body;
 
     await complaint.findByIdAndUpdate(id ,{
+        title:title,
         description:description
     })
 

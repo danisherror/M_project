@@ -5,9 +5,17 @@ const complaintSchema=new mongoose.Schema({
         type:mongoose.Schema.ObjectId,
         ref:'User',
         required:true
+    }
+    ,
+    title:{
+        type:String
     },
     description:{
         type:String
+    },
+    status:{
+        type:String,
+        default:'pending'
     }
 })
 

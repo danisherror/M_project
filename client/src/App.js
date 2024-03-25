@@ -28,6 +28,7 @@ import CreateHostelForm from './Admin/CreateHostel';
 import DeleteHostelForm from './Admin/DeleteHostel';
 import GetHostelDetails from './Admin/RoomInfo';
 import ShowStudentProfile from './Admin/ShowStudentProfile';
+import ChangeRoomIssueStatus from './Admin/ChangeRoomIssueStatus'
 function App() {
   return (
     <div>
@@ -66,6 +67,7 @@ function App() {
         <Route path="/createHostel" element={<CreateHostelForm />} />
         <Route path="/deleteHostel" element={<DeleteHostelForm />} />
         <Route path="/getHostelDetails" element={<GetHostelDetails />} />
+        <Route path="/changerooomissueStatus" element={<ChangeRoomIssueStatus />} />
         <Route path="/showStudentProfile" element={<ShowStudentProfile />} />
       </Routes>
     </div>

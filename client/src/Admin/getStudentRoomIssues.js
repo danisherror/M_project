@@ -69,19 +69,23 @@ const PrintRoomComplaints = () => {
 
                                 <thead>
                                     <tr>
+                                        <th>title</th>
                                         <th>Issues</th>
+                                        <th>status</th>
                                         {/* <th>Change Status</th> */}
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {roomissues.map((issuesEntry, index) => (
                                         <tr key={index}>
+                                            <td>{issuesEntry.title}</td>
                                             <td>{issuesEntry.description}</td>
-                                            {/* <td>
+                                            <td>{issuesEntry.status}</td>
+                                            <td>
                                                 <div className="add_btn" align="center">
-                                                    <NavLink to={"/changeStudentStatus"}> <button className="btn btn-primary" onClick={() => storeIdInLs(issuesEntry._id)} >edit</button></NavLink>
+                                                    <NavLink to={"/changerooomissueStatus"}> <button className="btn btn-primary" onClick={() => storeIdInLs(issuesEntry._id)} >edit</button></NavLink>
                                                 </div>
-                                            </td> */}
+                                            </td>
                                         </tr>
                                     ))}
                                 </tbody>

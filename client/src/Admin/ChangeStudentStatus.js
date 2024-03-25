@@ -1,5 +1,6 @@
 import BackgroundImage from '../assets/img/signin.png'
 import "../css/login.css";
+import Navbar from "../Logins/ANavbar"
 import React, { useEffect, useState } from 'react'
 import { Form, Button, Alert } from "react-bootstrap";
 
