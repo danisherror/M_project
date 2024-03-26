@@ -24,6 +24,9 @@ export default function Landing() {
                     <a href="http://localhost:3000/printFeedbackData">Yours FeedBack</a>
                     <a href="http://localhost:3000/roomcomplaint">Room Issues</a>
                     <a href="http://localhost:3000/printRoomComplaints">Your Room Issues</a>
+                    <a href="http://localhost:3000/leaveapplication">Leave Application</a>
+                    <a href="http://localhost:3000/printleaveapplication">Your Leave Application</a>
+
                     <a href="http://localhost:3000/">Logout</a>
                 </div>
             </div>

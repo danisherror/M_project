@@ -1,5 +1,6 @@
 import BackgroundImage from '../assets/img/signin.png'
 import "../css/login.css";
+import Navbar from "../Logins/Navbar"
 import React, { useEffect, useState } from 'react'
 import { Form, Button, Alert } from "react-bootstrap";
 
@@ -96,6 +97,7 @@ const EditStudentProfile = () => {
 
 
     return (
+        <><Navbar />
         <div className="sign-in__wrapper"
             style={{ backgroundImage: `url(${BackgroundImage})` }}
         >
@@ -125,6 +127,7 @@ const EditStudentProfile = () => {
                 <button type="submit" onClick={updateProfile} class="w-100 btn-primary">Submit</button>
             </form>
         </div>
+        </>
     )
 }
 

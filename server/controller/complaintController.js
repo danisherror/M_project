@@ -39,7 +39,7 @@ exports.editcomplaint=BigPromise(async(req,res,next)=>{
         description:description
     })
 
-    res.status("200").json({
+    res.status(200).json({
         message:"SUCCESSFULLY UPDATED"
     })
 

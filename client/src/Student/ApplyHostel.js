@@ -1,5 +1,6 @@
 import BackgroundImage from '../assets/img/signin.png'
 import "../css/login.css"
+import Navbar from "../Logins/Navbar"
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form, Button, Alert } from "react-bootstrap";
@@ -71,6 +72,7 @@ const ApplyHostel = () => {
     };
 
     return (
+        <><Navbar />
         <div className="sign-in__wrapper"
         style={{ backgroundImage: `url(${BackgroundImage})` }}>
             <form className="shadow p-4 bg-white rounded" onSubmit={handleSubmit}>
@@ -130,6 +132,7 @@ const ApplyHostel = () => {
                 </button>
             </form>
         </div>
+        </>
     );
 };
 

@@ -15,7 +15,7 @@ import PrintFeedBackData from './Student/PrintFeedBackData';
 import PrintRoomComplaints from './Student/PrintRoomComplaint';
 import EditStudentFeedBack from './Student/EditStudentFeedBack';
 import EditStudentComplaint from './Student/EditStudentComplaint';
-
+import EditLeaveApplication from './Student/EditLeaveApplication';
 
 import AHomepage from "./Admin/HomePage"
 import AeditImage from "./Admin/EditprofilePic"
@@ -29,6 +29,8 @@ import DeleteHostelForm from './Admin/DeleteHostel';
 import GetHostelDetails from './Admin/RoomInfo';
 import ShowStudentProfile from './Admin/ShowStudentProfile';
 import ChangeRoomIssueStatus from './Admin/ChangeRoomIssueStatus'
+import GetStudentLeaveApplication from "./Admin/GetLeaveApplication"
+import AEditstudentLeaveApplication from './Admin/ChangeLeaveApplicationStatus'
 function App() {
   return (
     <div>
@@ -59,7 +61,8 @@ function App() {
         <Route path="/feedback" element={<FeedbackPage />} />
         <Route path="/roomcomplaint" element={<Roomcomplaint />} />
         <Route path="/leaveapplication" element={<LeaveApplication />} />
-        <Route path="/printLeaveData" element={<PrintLeaveData />} />
+        <Route path="/printleaveapplication" element={<PrintLeaveData />} />
+        <Route path="/editStudentleaveapplication" element={<EditLeaveApplication />} />
         <Route path="/printFeedbackData" element={<PrintFeedBackData />} />
         <Route path="/printRoomComplaints" element={<PrintRoomComplaints />} />
         <Route path="/editStudentFeedBack" element={<EditStudentFeedBack />} />
@@ -69,6 +72,9 @@ function App() {
         <Route path="/getHostelDetails" element={<GetHostelDetails />} />
         <Route path="/changerooomissueStatus" element={<ChangeRoomIssueStatus />} />
         <Route path="/showStudentProfile" element={<ShowStudentProfile />} />
+        <Route path="/getLeaveApplication" element={<GetStudentLeaveApplication />} />
+        <Route path="/changeleaveApplicationStatus" element={<AEditstudentLeaveApplication />} />
+        
       </Routes>
     </div>
   );

@@ -8,5 +8,6 @@ router.route('/usignin').post(signin)
 router.route('/studentProfile').get(isLoggedIn,studentProfile)
 router.route('/editImage').patch(isLoggedIn,editImage)
 router.route('/editStudentProfile').patch(isLoggedIn,editStudentProfile)
+
 router.route('/applyHostel').patch(isLoggedIn,applyHostel)
 module.exports=router;

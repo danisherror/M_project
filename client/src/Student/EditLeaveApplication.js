@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect,useState } from "react";
 import Navbar from "../Logins/Navbar"
 import Leave from "../assets/img/leave.jpg";
 import Leave1 from "../assets/img/Leave1.png";
@@ -8,7 +8,8 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import {  useNavigate } from 'react-router-dom'
 
-const LeaveApplication = () => {
+const EditLeaveApplication = () => {
+    const id=localStorage.getItem("id")
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
     const [reason, setReason] = useState("");
@@ -67,11 +68,10 @@ const LeaveApplication = () => {
         }
         const token = localStorage.getItem('token');
         console.log(startDate,endDate,reason)
-        const response = await fetch(`/api/v1/addleaveappliacation`, {
-            method: "POST",
+        const response = await fetch(`/api/v1/updateleaveappliacation/${id}`, {
+            method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify({
                 startDate,
@@ -91,6 +91,34 @@ const LeaveApplication = () => {
             // Optionally, you can handle success actions here
         }
     };
+    const getdata = async () => {
+
+        const res = await fetch(`/api/v1/getsingleleaveapplication/${id}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        });
+    
+        const data = await res.json();
+        console.log(data);
+    
+        if (res.status === 422 || !data) {
+            console.log("error ");
+    
+        } else {
+            // setINP(data.user)
+            setStartDate(data.result.startDate);
+            setEndDate(data.result.endDate);
+            setReason(data.result.reason);
+            console.log("get data");
+    
+        }
+    }
+    
+      useEffect(() => {
+        getdata();
+    }, []);
 
     return (
         <><Navbar />
@@ -184,4 +212,4 @@ const LeaveApplication = () => {
     );
 };
 
-export default LeaveApplication;
+export default EditLeaveApplication;

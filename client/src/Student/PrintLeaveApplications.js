@@ -1,12 +1,13 @@
 
 import React, { useEffect, useState } from 'react'
-
+import Navbar from "../Logins/Navbar"
+import { useID } from '../Auth/Auth';
 import { NavLink } from 'react-router-dom'
 
 const PrintLeaveData = () => {
 
 
-
+    const storeIdInLs = useID();
     const [leaveData, setLeaveData] = useState([]);
     const getToken = () => {
         return localStorage.getItem('token');
@@ -16,10 +17,11 @@ const PrintLeaveData = () => {
     console.log(token)
     const getdata = async () => {
 
-        const res = await fetch(`/api/v1/studentProfile/${token}`, {
+        const res = await fetch(`/api/v1/getleaveapplication`, {
             method: "GET",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
             }
         });
 
@@ -34,7 +36,7 @@ const PrintLeaveData = () => {
             console.log("error ");
 
         } else {
-            setLeaveData(data.user.leave)
+            setLeaveData(data.result)
             console.log(leaveData)
             console.log("get data");
         }
@@ -50,6 +52,7 @@ const PrintLeaveData = () => {
 
     return (
         <>
+        <Navbar />
             <div>
                 {/* Display other components related to student profile */}
                 <div>
@@ -60,6 +63,8 @@ const PrintLeaveData = () => {
                                 <th>Start Date</th>
                                 <th>End Date</th>
                                 <th>Reason</th>
+                                <th>Status</th>
+                                <th>edit</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -68,6 +73,12 @@ const PrintLeaveData = () => {
                                     <td>{leaveEntry.startDate}</td>
                                     <td>{leaveEntry.endDate}</td>
                                     <td>{leaveEntry.reason}</td>
+                                    <td>{leaveEntry.status}</td>
+                                    <td>
+                                                <div className="add_btn" align="center">
+                                                    <NavLink to={"/editStudentleaveapplication"}> <button className="btn btn-primary" onClick={() => storeIdInLs(leaveEntry._id)} >edit</button></NavLink>
+                                                </div>
+                                            </td>
                                 </tr>
                             ))}
                         </tbody>

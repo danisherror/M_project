@@ -1,5 +1,6 @@
 import BackgroundImage from '../assets/img/signin.png'
 import "../css/login.css";
+import Navbar from "../Logins/Navbar"
 import React, { useState } from 'react'
 import {  useNavigate } from 'react-router-dom'
 
@@ -59,6 +60,7 @@ const EditImage = () => {
 
 
   return (
+    <><Navbar />
     <div className="sign-in__wrapper"
     style={{ backgroundImage: `url(${BackgroundImage})` }}>
             <form className="shadow p-4 bg-white rounded">
@@ -70,6 +72,7 @@ const EditImage = () => {
                     <button type="submit" onClick={updateProfilePic} class="btn btn-primary">Submit</button>
             </form>
         </div>
+        </>
   )
 }
 
