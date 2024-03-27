@@ -5,6 +5,8 @@ import Navbar from "../Logins/Navbar";
 import React, { useEffect, useState } from 'react'
 import { Alert } from "react-bootstrap";
 import { NavLink } from 'react-router-dom'
+// import {Qrcode} from 'qrcode'
+import QRCode from 'qrcode.react';
 const axios = require('axios')
 
 const HomePage = () => {
@@ -18,6 +20,7 @@ const HomePage = () => {
     const token = getToken();
     const storeTokenInLS = useStatus();
     console.log(token)
+    const [qrCodeText, setQRCodeText] = useState('');
     const getdata = async () => {
         const res = await fetch(`/api/v1/studentProfile`, {
             method: "GET",
@@ -30,7 +33,7 @@ const HomePage = () => {
         const data = await res.json();
         console.log(data);
         if (res.status === 404) {
-           alert("404 Error: Resource not found");
+            alert("404 Error: Resource not found");
             // Handle the error appropriately, e.g., display an error message to the user
         }
 
@@ -39,19 +42,30 @@ const HomePage = () => {
 
         } else {
             setStudentDetail(data.user)
-            storeTokenInLS(data.user.status)
+            setQRCodeText(data.user._id)
             console.log("get data");
         }
     }
-
+    const downloadQRCode = () => {
+        const qrCodeURL = document.getElementById('qrCodeEl')
+            .toDataURL("image/png")
+            .replace("image/png", "image/octet-stream");
+        console.log(qrCodeURL)
+        let aEl = document.createElement("a");
+        aEl.href = qrCodeURL;
+        aEl.download = "QR_Code.png";
+        document.body.appendChild(aEl);
+        aEl.click();
+        document.body.removeChild(aEl);
+    }
     useEffect(() => {
         getdata();
     }, [])
 
     return (
         <>
-            
-                    <Navbar />
+
+            <Navbar />
             <div class="student-profile py-4" style={{
                 backgroundImage: `url(${backgroundImage})`, position: 'fixed',
                 width: '100%',
@@ -141,9 +155,36 @@ const HomePage = () => {
                                             <td width="2%">:</td>
                                             <td>{getuserdata.phone}</td>
                                         </tr>
+                                        <tr>
+                                            <th width="30%">Token</th>
+                                            <td width="2%">:</td>
+                                            <td>
+                                            <QRCode  id="qrCodeEl" size={150} value={qrCodeText} renderAs="canvas" />,</td>
+                                        </tr>
+                                        {/* <tr>
+                                                <input
+                                                    type="button"
+                                                    className="download-btn"
+                                                    value="Download"
+                                                    onClick={downloadQRCode}
+                                                /></tr> */}
                                     </table>
                                 </div>
                             </div>
+                            {/* <div>
+                                <h1>QRCode</h1>
+                                <Qrcode value={data} />
+                                <div style={{ marginTop: "2em" }}>
+                                    <input
+                                        value={data}
+                                        style={{ width: "300px" }}
+                                        onChange={(e) => {
+                                            setData(e.target.value);
+                                        }}
+                                    />
+                                </div>
+                                <p>{data}</p>
+                            </div> */}
 
 
                         </div>
