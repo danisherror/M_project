@@ -1,7 +1,4 @@
 const Admin=require('../models/admin')
-const User=require('../models/user')
-const Feedback= require('../models/feedback')
-const Complaint=require('../models/complaint')
 const CollegeHostelRoom = require('../models/hostel')
 const BigPromise=require('../middlewares/bigPromise')
 const bcrypt=require('bcryptjs')
@@ -32,14 +29,14 @@ exports.signup=BigPromise(async(req,res,next)=>{
         email,
         token:user.getJwtToken()
    })
-    
+
 })
 
 exports.signin=BigPromise(async (req,res)=>{
 
     const {email,password}=req.body
 
-    const user=await Admin.findOne({email:email}).select("+password") 
+    const user=await Admin.findOne({email:email}).select("+password")
     if(!user)
     {
         return res.status(401).json({
@@ -48,7 +45,7 @@ exports.signin=BigPromise(async (req,res)=>{
     }
 
     if(!await  bcrypt.compare(password,user.password)){
-       
+
         return res.status(401).json({
             message:"Password does not match "
         })
@@ -58,13 +55,13 @@ exports.signin=BigPromise(async (req,res)=>{
         user,
         token
     })
-    
+
 })
 exports.adminprofile=BigPromise(async(req,res)=>{
-    
+
     const id=req.user._id
     const user=await Admin.findById(id);
-    
+
     res.status(200).json({
         user
     })
@@ -79,7 +76,7 @@ exports.editImage=BigPromise(async(req,res)=>{
     // console.log(user);
     // console.log("--------------");
     res.status(200).json({
-        
+
     })
     }
     catch(error)
@@ -95,7 +92,7 @@ exports.editAdminProfile=BigPromise(async(req,res)=>{
     });
     // console.log(user);
     res.status(200).json({
-        
+
     })
     }
     catch(error)
@@ -103,67 +100,8 @@ exports.editAdminProfile=BigPromise(async(req,res)=>{
         console.log(error);
     }
 })
-exports.getStudentprofiles=BigPromise(async(req,res)=>{
-    
-    const id=req.user._id
-    const user=await User.find()
-    
-    res.status(200).json({
-        user
-    })
-})
-exports.editStudentProfile=BigPromise(async(req,res)=>{
-    try{
-    const id=req.params.id
-    const user=await User.findByIdAndUpdate(id,req.body,{
-        new:true
-    });
-    // console.log(user);
-    res.status(200).json({
-        
-    })
-    }
-    catch(error)
-    {
-        console.log(error);
-    }
-})
-exports.studentProfile=BigPromise(async(req,res)=>{
-    
-    const id=req.params.id;
-    const user=await User.findById(id);
-    // console.log("------------------------------")
-    // console.log(user)
-    res.status(200).json({
-        user
-    })
-})
-exports.getStudentfeedback=BigPromise(async(req,res,next)=>{
 
-    const result=await Feedback.find()
-    res.status(200).json({
-        result
-    })
-})
-exports.getStudentcomplaints=BigPromise(async(req,res,next)=>{
 
-    const result=await Complaint.find()
-    res.status(200).json({
-        result
-    })
-})
-exports.editstudentcomplaintstatus=BigPromise(async(req,res,next)=>{
-    const id=req.params.id;
-    const {title,description,status}=req.body;
-    console.log(title,description,status)
-    await Complaint.findByIdAndUpdate(id,req.body,{
-        new:true
-    });
-
-    res.status(200).json({
-        message:"SUCCESSFULLY UPDATED"
-    })
-})
 exports.getHostelDetails=BigPromise(async(req,res,next)=>{
 
     const hostel_names = await CollegeHostelRoom.find().distinct('hostelName');
@@ -172,14 +110,14 @@ exports.getHostelDetails=BigPromise(async(req,res,next)=>{
         hostel_names,
         all_hostel
     })
-    
+
 })
 exports.createHostel = BigPromise(async (req, res) => {
     try {
         // Create hostels with blocks and rooms
-        
+
         const { hostelName, blocks } = req.body;
-        
+
         const existingHostel = await CollegeHostelRoom.findOne({  hostelName: hostelName});
         if (existingHostel) {
             return res.status(400).json({ error: 'Hostel with the same name already exists.' });

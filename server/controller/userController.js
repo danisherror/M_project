@@ -30,14 +30,14 @@ exports.signup=BigPromise(async(req,res,next)=>{
         email,
         token:user.getJwtToken()
    })
-    
+
 })
 
 exports.signin=BigPromise(async (req,res)=>{
 
     const {email,password}=req.body
 
-    const user=await User.findOne({email:email}).select("+password") 
+    const user=await User.findOne({email:email}).select("+password")
     console.log(req.body)
     if(!user)
     {
@@ -47,7 +47,7 @@ exports.signin=BigPromise(async (req,res)=>{
     }
 
     if(!await  bcrypt.compare(password,user.password)){
-       
+
         return res.status(401).json({
             message:"Password does not match "
         })
@@ -57,13 +57,13 @@ exports.signin=BigPromise(async (req,res)=>{
         user,
         token
     })
-    
+
 })
 exports.studentProfile=BigPromise(async(req,res)=>{
-    
+
     const id=req.user._id
     const user=await User.findById(id);
-    
+
     res.status(200).json({
         user
     })
@@ -78,7 +78,7 @@ exports.editImage=BigPromise(async(req,res)=>{
     console.log(user);
     console.log("--------------");
     res.status(200).json({
-        
+
     })
     }
     catch(error)
@@ -94,7 +94,7 @@ exports.editStudentProfile=BigPromise(async(req,res)=>{
     });
     console.log(user);
     res.status(200).json({
-        
+
     })
     }
     catch(error)
@@ -146,5 +146,39 @@ exports.applyHostel=BigPromise(async(req,res)=>{
         res.status(500).json({ error: 'Internal server error' });
     }
 })
+exports.aeditStudentProfile=BigPromise(async(req,res)=>{
+    try{
+    const id=req.params.id
+    const user=await User.findByIdAndUpdate(id,req.body,{
+        new:true
+    });
+    // console.log(user);
+    res.status(200).json({
 
+    })
+    }
+    catch(error)
+    {
+        console.log(error);
+    }
+})
+exports.getStudentprofiles=BigPromise(async(req,res)=>{
+
+    const id=req.user._id
+    const user=await User.find()
+
+    res.status(200).json({
+        user
+    })
+})
+exports.astudentProfile=BigPromise(async(req,res)=>{
+
+    const id=req.params.id;
+    const user=await User.findById(id);
+    // console.log("------------------------------")
+    // console.log(user)
+    res.status(200).json({
+        user
+    })
+})
 

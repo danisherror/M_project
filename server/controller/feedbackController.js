@@ -6,7 +6,7 @@ exports.addfeedback=BigPromise(async(req,res,next)=>{
 
     console.log("Enter the route")
     const {rating,review}=req.body
-    
+
     const result=await feedback.create({
         user:req.user._id,
         rating:rating,
@@ -51,6 +51,13 @@ exports.getsinglefeedback=BigPromise(async(req,res,next)=>{
     console.log("--------------------\n--------------\n")
     console.log("--------------------\n--------------\n")
     console.log(result)
+    res.status(200).json({
+        result
+    })
+})
+exports.getStudentfeedback=BigPromise(async(req,res,next)=>{
+
+    const result=await feedback.find()
     res.status(200).json({
         result
     })

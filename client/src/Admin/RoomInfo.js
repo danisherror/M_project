@@ -143,7 +143,7 @@ const GetHostelDetails = () => {
                                 </label>
                             </div>
                             <div>
-                                
+
                                 <button className="btn btn-primary ml-3" onClick={generateReport}>Generate Report</button>
                             </div>
                         </div>
