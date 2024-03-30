@@ -31,6 +31,7 @@ import ShowStudentProfile from './Admin/ShowStudentProfile';
 import ChangeRoomIssueStatus from './Admin/ChangeRoomIssueStatus'
 import GetStudentLeaveApplication from "./Admin/GetLeaveApplication"
 import AEditstudentLeaveApplication from './Admin/ChangeLeaveApplicationStatus'
+import QRScanner from './Admin/Scanner'
 function App() {
   return (
     <div>
@@ -45,7 +46,7 @@ function App() {
         <Route path="/editImage" element= {<EditImage />} />
         <Route path="/aeditImage" element= {<AeditImage />} />
 
-        
+
         <Route path="/editStudentProfile" element= {<EditStudentProfile />} />
         <Route path="/editAdminProfile" element= {< EditAdminProfile/>} />
 
@@ -53,10 +54,10 @@ function App() {
         <Route path="/changeStudentStatus" element= {< AEditStudentStatus/>} />
 
         <Route path="/getStudentFeedback" element= {< GetStudentFeedbacks/>} />
-        
+
         <Route path="/getstudentroomissues" element= {< GetStudentRoomIsses/>} />
 
-        
+
         <Route path="/applyHostel" element={<ApplyHostel />} />
         <Route path="/feedback" element={<FeedbackPage />} />
         <Route path="/roomcomplaint" element={<Roomcomplaint />} />
@@ -74,7 +75,8 @@ function App() {
         <Route path="/showStudentProfile" element={<ShowStudentProfile />} />
         <Route path="/getLeaveApplication" element={<GetStudentLeaveApplication />} />
         <Route path="/changeleaveApplicationStatus" element={<AEditstudentLeaveApplication />} />
-        
+        <Route path="/scanqrcode" element={<QRScanner />} />
+
       </Routes>
     </div>
   );

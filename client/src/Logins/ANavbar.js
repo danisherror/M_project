@@ -27,6 +27,7 @@ export default function Landing() {
                     <a href="http://localhost:3000/getStudentFeedback">FeedBacks</a>
                     <a href="http://localhost:3000/getstudentroomissues">Room Issues</a>
                     <a href="http://localhost:3000/getLeaveApplication">Leave Application</a>
+                    <a href="http://localhost:3000/scanqrcode">Scanner Qr code</a>
                     <a href="http://localhost:3000/">Logout</a>
                 </div>
             </div>
